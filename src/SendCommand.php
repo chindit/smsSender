@@ -40,7 +40,7 @@ class SendCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $destination = getenv('SMS_RECEIVER');
-        $sender = getenv('SMS_SENDER');
+
         if (!$input->getArgument('text') || empty($input->getArgument('text'))) {
             $output->writeln('<error>A message content is required</error>');
             return;
@@ -48,10 +48,10 @@ class SendCommand extends ContainerAwareCommand
 
         $output->writeln('<comment>'.$input->getArgument('text').'</comment>');
         $output->writeln($destination);
-        $sms = new SmsApi(getenv('APPLICATION_KEY'),
-            getenv('APPLICATION_SECRET'),
-            getenv('API_ENDPOINT'),
-            getenv('CONSUMER_KEY'));
+        $sms = new SmsApi(getenv('SMS_APPLICATION_KEY'),
+            getenv('SMS_APPLICATION_SECRET'),
+            getenv('SMS_API_ENDPOINT'),
+            getenv('SMS_CONSUMER_KEY'));
 
         $accounts = $sms->getAccounts();
         $sms->setAccount($accounts[0]);
