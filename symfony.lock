@@ -1,4 +1,19 @@
 {
+    "guzzlehttp/guzzle": {
+        "version": "5.3.2"
+    },
+    "guzzlehttp/ringphp": {
+        "version": "1.1.0"
+    },
+    "guzzlehttp/streams": {
+        "version": "3.0.0"
+    },
+    "ovh/ovh": {
+        "version": "v1.1.2"
+    },
+    "ovh/php-ovh-sms": {
+        "version": "1.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -10,6 +25,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "react/promise": {
+        "version": "v2.5.1"
     },
     "symfony/cache": {
         "version": "v4.0.11"
@@ -25,6 +43,9 @@
             "version": "3.3",
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
+    },
+    "symfony/contracts": {
+        "version": "v1.0.2"
     },
     "symfony/debug": {
         "version": "v4.0.11"
@@ -82,6 +103,9 @@
             "version": "4.0",
             "ref": "cda8b550123383d25827705d05a42acf6819fe4e"
         }
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.2"
     },
     "symfony/yaml": {
         "version": "v4.0.11"
