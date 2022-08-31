@@ -3,7 +3,8 @@
 namespace App;
 
 use Ovh\Sms\SmsApi;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,24 +27,25 @@ use Symfony\Component\Console\Output\OutputInterface;
  * First generated : 05/26/2018 at 18:03
  */
 
-class SendCommand extends ContainerAwareCommand
+#[AsCommand(name: 'sms:send')]
+class SendCommand extends Command
 {
+    protected static $defaultDescription = 'Send a SMS';
+
     protected function configure()
     {
         $this
-            ->setName('sms:send')
-            ->setDescription('Send a SMS')
             ->setHelp('This command allows you to send a SMS to a specific user')
             ->addArgument('text', InputArgument::REQUIRED, 'Content of the SMS');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $destination = getenv('SMS_RECEIVER');
 
         if (!$input->getArgument('text') || empty($input->getArgument('text'))) {
             $output->writeln('<error>A message content is required</error>');
-            return;
+            return Command::FAILURE;
         }
 
         $output->writeln('<comment>'.$input->getArgument('text').'</comment>');
@@ -64,6 +66,9 @@ class SendCommand extends ContainerAwareCommand
             $output->writeln('<info>Message sent successfully</info>');
         } catch (\Exception $e) {
             $output->writeln('<error>Unable to send message: ' . $e->getMessage() . '</error>');
+            return Command::FAILURE;
         }
+
+        return Command::SUCCESS;
     }
 }
